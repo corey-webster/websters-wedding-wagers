@@ -1,3 +1,4 @@
+
 /* Mobile-first base styles */
 :root {
     --magenta: #DB7093;
@@ -103,6 +104,26 @@ header {
     font-size: 16px; /* Prevent zoom on iOS */
     -webkit-appearance: none; /* Remove default iOS styling */
     margin-bottom: 10px;
+}
+
+input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Remove spinner buttons for number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
 }
 
 .bet-button {
