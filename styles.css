@@ -7,11 +7,7 @@
     --soft-pink: #FFB6C1;
     --cream: #FFF0F5;
     --text-color: #4A4A4A;
-    --primary-color: #DB7093;  /* Deep pink */
-    --secondary-color: #96A886;  /* Sage green */
-    --accent-color: #E9967A;  /* Coral/peach */
-    --background-color: #FFF0F5;  /* Lavender blush */
-    --suit-blue: #6B8CAE;  /* Adding the suit color */
+    --suit-blue: #6B8CAE;
 }
 
 * {
@@ -59,7 +55,7 @@ header {
 
 .lead {
     font-size: 1.1rem;
-    color: var(--primary-color);
+    color: var(--magenta);
 }
 
 .betting-container {
@@ -87,7 +83,7 @@ header {
 .bet-description {
     font-size: 1rem;
     margin-bottom: 15px;
-    color: var(--primary-color);
+    color: var(--magenta);
 }
 
 .wager-input {
@@ -115,7 +111,7 @@ header {
     font-size: 1rem;
     border-radius: 8px;
     border: none;
-    background-color: var(--primary-color);
+    background-color: var(--magenta);
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -306,3 +302,4 @@ body {
     background-color: darken(var(--cream), 10%);
     box-shadow: 0 4px 8px rgba(255, 240, 245, 0.2);
 }
+
