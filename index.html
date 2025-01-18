@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#DB7093">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Webster's Wedding Wagers | Corey & Caitlyn's Big Day</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-5">
+            <h1 class="display-3">Webster's Wedding Wagers</h1>
+            <p class="lead">Place Your Bets on Corey & Caitlyn's Big Day</p>
+            <p class="subtitle">Where Love Meets Luck</p>
+        </header>
+
+        <div class="betting-container">
+            <div class="betting-card magenta-theme">
+                <h3> The Tears Bet</h3>
+                <p class="bet-description">Will the groom cry during the ceremony?</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-tears">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-tears" min="20" max="100" class="wager-amount">
+                    </div>
+                    <button class="bet-button" onclick="placeBet('tears', 'yes', 'wager-tears')">Yes (-150)</button>
+                    <button class="bet-button" onclick="placeBet('tears', 'no', 'wager-tears')">No (+130)</button>
+                </div>
+            </div>
+
+            <div class="betting-card dusty-blue-theme">
+                <h3>⏱️ The Grand Entrance</h3>
+                <p class="bet-description">How many seconds will it take the brides to walk to the podium?</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-walk">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-walk" min="20" max="100" class="wager-amount">
+                    </div>
+                    <div class="over-under">
+                        <p>Over/Under: 45 seconds</p>
+                        <button class="bet-button" onclick="placeBet('walk', 'over', 'wager-walk')">Over (-110)</button>
+                        <button class="bet-button" onclick="placeBet('walk', 'under', 'wager-walk')">Under (-110)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="betting-card sage-theme">
+                <h3>🎵 First Dance Duration</h3>
+                <p class="bet-description">Duration of the first dance</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-dance">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-dance" min="20" max="100" class="wager-amount">
+                    </div>
+                    <div class="over-under">
+                        <p>Over/Under: 3 minutes 30 seconds</p>
+                        <button class="bet-button" onclick="placeBet('dance', 'over', 'wager-dance')">Over (-120)</button>
+                        <button class="bet-button" onclick="placeBet('dance', 'under', 'wager-dance')">Under (+100)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="betting-card coral-theme">
+                <h3>💝 First "I Love You"</h3>
+                <p class="bet-description">Who said I love you first?</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-love">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-love" min="20" max="100" class="wager-amount">
+                    </div>
+                    <button class="bet-button" onclick="placeBet('love', 'corey', 'wager-love')">Corey (-110)</button>
+                    <button class="bet-button" onclick="placeBet('love', 'caitlyn', 'wager-love')">Caitlyn (-110)</button>
+                </div>
+            </div>
+
+            <div class="betting-card soft-pink-theme">
+                <h3>🤭 The Trip Slip</h3>
+                <p class="bet-description">Will a groomsmen and bridesmaid trip?</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-trip">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-trip" min="20" max="100" class="wager-amount">
+                    </div>
+                    <button class="bet-button" onclick="placeBet('trip', 'yes', 'wager-trip')">Yes (-220)</button>
+                    <button class="bet-button" onclick="placeBet('trip', 'no', 'wager-trip')">No (+180)</button>
+                </div>
+            </div>
+
+            <div class="betting-card magenta-theme">
+                <h3>💋 First Kiss</h3>
+                <p class="bet-description">How long is the first kiss?</p>
+                <div class="odds-container">
+                    <div class="wager-input">
+                        <label for="wager-kiss">Wager Amount ($20-$100):</label>
+                        <input type="number" id="wager-kiss" min="20" max="100" class="wager-amount">
+                    </div>
+                    <div class="over-under">
+                        <p>Over/Under: 3 seconds</p>
+                        <button class="bet-button" onclick="placeBet('kiss', 'under', 'wager-kiss')">Under (-125)</button>
+                        <button class="bet-button" onclick="placeBet('kiss', 'over', 'wager-kiss')">Over (+135)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bet-slip" class="bet-slip">
+            <h2>Your Bet Slip</h2>
+            <div id="active-bets"></div>
+            <div class="total-container">
+                <p>Total Potential Winnings: $<span id="potential-winnings">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
