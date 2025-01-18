@@ -19,109 +19,88 @@ function validateWager(wagerId) {
     return amount;
 }
 
+const betTypes = {
+    tears: {
+        yes: -150,
+        no: 130,
+        description: "Will the emotions get the best of Corey? Will he shed a tear during the ceremony?"
+    },
+    walk: {
+        over: -110,
+        under: -110,
+        description: "How many seconds will it take Caitlyn to walk down the aisle and get to Corey? (O/U 30 seconds)"
+    },
+    dance: {
+        over: -120,
+        under: 100,
+        description: "First dance duration (O/U 3:30)"
+    },
+    love: {
+        corey: -110,
+        caitlyn: -110,
+        description: "Who said I love you first?"
+    },
+    trip: {
+        yes: -220,
+        no: 180,
+        description: "Will a groomsmen or bridesmaid trip during the wedding ceremony?"
+    },
+    kiss: {
+        over: 135,
+        under: -125,
+        description: "First kiss duration (O/U 3 seconds)"
+    }
+};
+
 function placeBet(type, selection, wagerId) {
     const wagerAmount = validateWager(wagerId);
     if (!wagerAmount) return;
 
-    const betTypes = {
-        tears: {
-            yes: -150,
-            no: 130,
-            description: "Will the emotions get the best of Corey? Will he shed a tear during the ceremony?"
-        },
-        walk: {
-            over: -110,
-            under: -110,
-            description: "Walk duration (O/U 30 seconds)"
-        },
-        dance: {
-            over: -120,
-            under: 100,
-            description: "First dance duration (O/U 3:30)"
-        },
-        love: {
-            corey: -110,
-            caitlyn: -110,
-            description: "Who said I love you first?"
-        },
-        trip: {
-            yes: -220,
-            no: 180,
-            description: "Will someone trip?"
-        },
-        kiss: {
-            over: 135,
-            under: -125,
-            description: "First kiss duration (O/U 3 seconds)"
-        }
-    };
-
     const bet = {
         type: type,
         selection: selection,
+        amount: wagerAmount,
         odds: betTypes[type][selection],
-        description: betTypes[type].description,
-        wagerAmount: wagerAmount,
         potentialWinnings: calculatePotentialWinnings(betTypes[type][selection], wagerAmount)
     };
 
-    // Remove any existing bet of the same type
-    activeBets = activeBets.filter(b => b.type !== type);
     activeBets.push(bet);
-    
     updateBetSlip();
     createConfetti();
 }
 
 function updateBetSlip() {
-    const betSlipContainer = document.getElementById('active-bets');
-    const potentialWinningsElement = document.getElementById('potential-winnings');
+    const betSlip = document.getElementById('active-bets');
+    betSlip.innerHTML = '';
     
-    betSlipContainer.innerHTML = '';
-    let totalPotentialWinnings = 0;
-
-    activeBets.forEach(bet => {
+    activeBets.forEach((bet, index) => {
         const betElement = document.createElement('div');
         betElement.className = 'bet-item';
         betElement.innerHTML = `
-            <p><strong>${bet.description}</strong></p>
-            <p>Selection: ${bet.selection.toUpperCase()} (${bet.odds > 0 ? '+' + bet.odds : bet.odds})</p>
-            <p>Wager: $${bet.wagerAmount}</p>
+            <p><strong>${betTypes[bet.type].description}</strong></p>
+            <p>Selection: ${bet.selection.toUpperCase()}</p>
+            <p>Wager: $${bet.amount}</p>
             <p>Potential Winnings: $${bet.potentialWinnings}</p>
-            <hr>
+            <button onclick="removeBet(${index})" class="remove-bet">Remove</button>
         `;
-        betSlipContainer.appendChild(betElement);
-        totalPotentialWinnings += parseFloat(bet.potentialWinnings);
+        betSlip.appendChild(betElement);
     });
-
-    potentialWinningsElement.textContent = totalPotentialWinnings.toFixed(2);
 }
 
-// Add some fun confetti effects when placing bets
+function removeBet(index) {
+    activeBets.splice(index, 1);
+    updateBetSlip();
+}
+
 function createConfetti() {
-    const colors = ['#DB7093', '#FFB6C1', '#C71585', '#E9967A', '#FFF0F5', '#96A886'];
-    
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        confetti.style.opacity = Math.random();
-        document.body.appendChild(confetti);
-        
-        setTimeout(() => {
-            confetti.remove();
-        }, 5000);
-    }
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 }
 
 // Add click event listeners to all bet buttons
 document.addEventListener('DOMContentLoaded', () => {
-    const betButtons = document.querySelectorAll('.bet-button');
-    betButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            createConfetti();
-        });
-    });
+    updateBetSlip();
 });
