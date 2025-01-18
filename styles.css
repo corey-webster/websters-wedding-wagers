@@ -74,11 +74,16 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     border: 1px solid var(--soft-pink);
+    color: black;  /* Set font color to black for all text in betting boxes */
 }
 
 .betting-card h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
+}
+
+.bet-description, .wager-input label {
+    color: black;  /* Ensure descriptions and labels are black */
 }
 
 .bet-description {
@@ -88,10 +93,6 @@ header {
 
 .wager-input {
     margin-bottom: 15px;
-}
-
-.wager-input label {
-    font-size: 0.9rem;
 }
 
 .wager-amount {
