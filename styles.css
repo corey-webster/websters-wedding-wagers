@@ -11,6 +11,7 @@
     --secondary-color: #96A886;  /* Sage green */
     --accent-color: #E9967A;  /* Coral/peach */
     --background-color: #FFF0F5;  /* Lavender blush */
+    --suit-blue: #6B8CAE;  /* Adding the suit color */
 }
 
 * {
@@ -27,7 +28,8 @@ html, body {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--background-color);
+    background-color: var(--suit-blue);
+    background-image: linear-gradient(to bottom right, var(--suit-blue), #8BA5C4);
     color: var(--text-color);
     line-height: 1.6;
     padding: 0;
@@ -68,10 +70,10 @@ header {
 }
 
 .betting-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     border: 1px solid var(--soft-pink);
 }
