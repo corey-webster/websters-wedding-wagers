@@ -27,12 +27,12 @@ function placeBet(type, selection, wagerId) {
         tears: {
             yes: -150,
             no: 130,
-            description: "Will the groom cry?"
+            description: "Will the emotions get the best of Corey? Will he shed a tear during the ceremony?"
         },
         walk: {
             over: -110,
             under: -110,
-            description: "Walk duration (O/U 45 seconds)"
+            description: "Walk duration (O/U 30 seconds)"
         },
         dance: {
             over: -120,
